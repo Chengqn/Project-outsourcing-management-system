@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery-3.3.1.js"></script>
+    <link rel="stylesheet" href="./bootstrap.min.css">
+    <script src="./bootstrap.js"></script>
+    <style>
+    	*{
+    		padding:0;
+    		margin:0;
+    	}
+        html,body{
+			width: 100%;
+			height:100%;
+        }
+        body>div{
+        	width: 500px;
+		    padding: 20px;
+		    border: 1px solid #fff;
+		    background: #fff;
+		    border-radius: 5px;
+        }
+        body{
+        	background:#4298f2;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+        form{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+        }
+        .form-group{
+        	width:80%;
+        }
+        form>div:nth-child(3){
+        	display: flex;
+		    width: 80%;
+		    flex-direction: row;
+		    flex-wrap: nowrap;
+		    justify-content: space-between;
+		    align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+	<div>
+		<form id="login">
+	        <div class="form-group">
+	            <label for="name">账户名</label>
+	            <input type="text" class="form-control" id="name" placeholder="用户名">
+	        </div>
+	        <div class="form-group">
+	            <label for="password">密码</label>
+	            <input type="password" class="form-control" id="password" placeholder="密码">
+	        </div>
+	        <div>
+	        	<div class="checkbox">
+				    <label>
+				      <input id="remember" type="checkbox"> 记住密码
+				    </label>
+				 </div>
+	        	<button type="button" class="btn btn-default">登录</button>
+	        </div>
+	    </form>
+	</div>
+    <script>
+    	var storage = window.localStorage;//此处为赋值，方便后面调用。本地浏览器存储关闭浏览器不消失，还有一种是sessionStorage，关闭浏览器消失
+    	
+	    $(function(){
+	    	//var storage.getItem("name"); //获取之前存储的值，存储方法在下面的ajax中，（）内输入value
+	    	//$('#remember').prop('checked','checked') //初始化将记住密码选中
+	    })
+        $('button').eq(0).on('click',function(){ //给button绑定点击事件
+        	
+			//console.log($('#remember').prop('checked'))
+			//console.log($('#remember').attr('id'))//均可以获取节点的属性值，但是具有true和false这种的属性用prop，其他的attr，比如id
+        	login()
+        })
+        function login(){
+        	var jsondata = {name:$("#name").val(), password:$("#password").val()} //传输的用户名密码，字段名根据你们之前的接口自己修改
+        	//console.log(jsondata);
+        	$.ajax({
+                type: "POST",  //传递的方法，有get和post，登录这种一般用post，因为get能在路径里看到账号和密码
+                async:true,//可不填，默认为true.异步执行，值为false就为同步
+                url: "http://localhost:81/users/login",  //之前的实验写的接口
+                contentType: 'application/x-www-form-urlencoded;charset=utf-8',  //也可不填，默认值为application/x-www-form-urlencoded;，适用于大部分情况，传给服务器的编码类型
+                data:jsondata,  //上传的数据,因为会自动转成字符串类型，json对象会乱码导致传输失败，所以先手动转成字符串类型
+                dataType: "json",  //预估服务器返回的数据类型
+                crossDomain: true,
+                success: function(data){  //成功后执行的代码，data就是返回的数据
+                    //console.log(data);
+                	//登陆成功可以检测记住密码按钮
+					if($('#remember').prop('checked')){//判断记住密码是否被选中，只要（）内的值为true就执行{}代码
+						//var storage.setItem("name", "Rick"); 存储用户名距离
+                    }
+                    //console.log(123);
+					window.location.href= "/";//将当前路径修改，通过将域名和跳转路径相结合实现页面跳转
+
+                },  
+                error:function(e){  //失败后执行的代码，一般http状态码不是200的都是执行这个，e类似成功的data，字段名可以随便改，只要保持统一就行
+                            console.log(e);
+                }  
+            }); 
+        }
+    </script>
+</body>
+
+</html>
