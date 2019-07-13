@@ -41,6 +41,17 @@ public class Project {
     //项目承包商
     private  String contractor;
 
+    //上传的需求文档名
+    private  String filename;
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+
     public Integer getNumofdev() {
         return numofdev;
     }
@@ -125,6 +136,7 @@ public class Project {
                 ", puber='" + puber + '\'' +
                 ", numofdev=" + numofdev +
                 ", contractor='" + contractor + '\'' +
+                ", filename='" + filename + '\'' +
                 '}';
     }
 }

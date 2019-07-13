@@ -289,5 +289,16 @@ public class ProjectController {
         return R.data(missionService.getMissionByProject(pname));
     }
 
+    //通过id获取文件名
+    @UserLoginToken
+    @Role("admin")
+    @RequestMapping(value = "/getFileName/{ProjectId}",method = RequestMethod.GET)
+    public R<String> getFileName(@PathVariable Long ProjectId){
+        System.out.println(ProjectId);
+        Project project  = service.getProjectById(ProjectId);
+        System.out.println(project.getFilename());
+        return R.data(project.getFilename());
+    }
+
 
 }

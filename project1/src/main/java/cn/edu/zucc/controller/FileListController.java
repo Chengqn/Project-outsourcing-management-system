@@ -12,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 import cn.edu.zucc.common.R;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,7 +28,7 @@ public class FileListController {
 
     @PostMapping("/upload")
     @ResponseBody
-    public Map<String,String> uoload(@RequestParam("file") MultipartFile file) throws IOException{
+    public R<Map<String,String>> uoload(@RequestParam("file") MultipartFile file) throws IOException{
         log.info("[文件类型]-[{}]",file.getContentType());
         log.info("[文件名称]-[{}]",file.getOriginalFilename());
         log.info("[文件大小]-[{}]",file.getSize());
@@ -36,7 +38,7 @@ public class FileListController {
         result.put("contentType",file.getContentType());
         result.put("fileName",file.getOriginalFilename());
         result.put("fileSize",file.getSize()+"");
-        return  result;
+        return  R.data(result);
 
         //Jws<Claims> jwt = Jwts.parser().setSigningKey(R.KEY).parseClaimsJws(token);
 
@@ -63,6 +65,28 @@ public class FileListController {
             file.delete();
             return R.success("删除成功");
         }
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "/downloadfile/{filename}",method = RequestMethod.GET)
+    public R<String> downloadfile(@PathVariable String filename) throws IOException {
+        System.out.println(filename);
+        String url1 ="C:\\Users\\cqn\\Desktop\\Java EE\\J2EE信管实验\\实验七\\"+filename;// 源文件路径
+        System.out.println(url1);
+        String url2 = "C:\\Users\\cqn\\Desktop\\Java EE\\J2EE信管实验\\实验七\\download\\"+filename;       // 复制到目标路
+        FileInputStream in = new FileInputStream(new File(url1));
+        FileOutputStream out = new FileOutputStream(new File(url2));
+        byte[] buff = new byte[512];
+        int n = 0;
+//        System.out.println("复制文件：" + "\n" + "源路径：" + url1 + "\n" + "目标路径：" + url2);
+        while ((n = in.read(buff)) != -1) {
+            out.write(buff, 0, n);
+        }
+        out.flush();
+        in.close();
+        out.close();
+        return R.success("已成功下载"+filename);
     }
 
 
