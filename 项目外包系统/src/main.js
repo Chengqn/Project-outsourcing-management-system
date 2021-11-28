@@ -13,7 +13,7 @@ import moment from 'moment'
 Vue.config.productionTip = false
 
 //全局过滤器
-Vue.filter('fmtdate',(V)=>{
+Vue.filter('fmtdate', (V) => {
   return moment().format('YYYY-MM-DD')
 })
 
@@ -23,6 +23,6 @@ Vue.use(MyHttpServer)
 new Vue({
   el: '#app',
   router,
-  components: { App },
+  components: {App},
   template: '<App/>'
 })

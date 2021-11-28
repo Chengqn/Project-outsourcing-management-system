@@ -22,7 +22,6 @@ import AcceptedProject from '@/components/project/acceptedProject.vue'
 import Usermission from '@/components/home/Usermission.vue'
 
 
-
 Vue.use(Router)
 
 export default new Router({

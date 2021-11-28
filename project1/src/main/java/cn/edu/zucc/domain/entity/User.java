@@ -16,10 +16,10 @@ public class User {
     //主键生成策略 自增长
     private long id;
 
-    @NotEmpty(message="注解声明：用户名不能为空")
+    @NotEmpty(message = "注解声明：用户名不能为空")
     private String name;
     private Integer age;
-   // private Integer  yearIncome;
+    // private Integer  yearIncome;
     //private Integer monthIncome;
     private String role;
 
@@ -35,7 +35,6 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
-
 
 
     public void setSalt(String salt) {

@@ -51,13 +51,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-   // @Cacheable(value = "user",key = "#name")
+    // @Cacheable(value = "user",key = "#name")
     public User getUser(String name) {
-        return  userRepository.findByName(name);
+        return userRepository.findByName(name);
     }
 
     @Override
-    public User getUser(String name,String password){
+    public User getUser(String name, String password) {
         return userRepository.findByNameAndPassword(name, password);
     }
 }

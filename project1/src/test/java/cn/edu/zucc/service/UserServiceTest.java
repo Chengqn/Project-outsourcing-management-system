@@ -20,7 +20,7 @@ public class UserServiceTest extends StudioDemoApplicationTests {
     UserService userService;
 
     @Test
-    public void test001create(){
+    public void test001create() {
         User user1 = new User();
         user1.setName("cqn");
         user1.setAge(20);
@@ -32,13 +32,13 @@ public class UserServiceTest extends StudioDemoApplicationTests {
         userService.create(user1);
         userService.create(user2);
 
-        Assert.assertTrue(user1.getId()==1L);
-        Assert.assertTrue(user2.getId()==2L);
+        Assert.assertTrue(user1.getId() == 1L);
+        Assert.assertTrue(user2.getId() == 2L);
 
     }
 
     @Test
-    public void test002update(){
+    public void test002update() {
 
         User user1 = new User();
         user1.setName("TomCat");
@@ -47,44 +47,42 @@ public class UserServiceTest extends StudioDemoApplicationTests {
 
         userService.update(user1);
         User user = userService.getUser(1L);
-        Assert.assertThat(user.getName(),is(user1.getName()));
+        Assert.assertThat(user.getName(), is(user1.getName()));
 
     }
+
     @Test
-    public void test003deleteById(){
-        Assert.assertThat(userService.getAllUsers().size(),is(2));
+    public void test003deleteById() {
+        Assert.assertThat(userService.getAllUsers().size(), is(2));
         userService.deleteById(1L);
-        Assert.assertThat(userService.getAllUsers().size(),is(1));
+        Assert.assertThat(userService.getAllUsers().size(), is(1));
     }
 
     @Test
-    public void test004getAllUsers(){
+    public void test004getAllUsers() {
         User user1 = new User();
         user1.setName("TomCat");
         user1.setAge(20);
         user1.setId(1L);
 
         List<User> getAllUsers = userService.getAllUsers();
-        Assert.assertThat(getAllUsers.get(0).getName(),is(user1.getName()));
+        Assert.assertThat(getAllUsers.get(0).getName(), is(user1.getName()));
 
 
     }
+
     @Test
     public void test005() throws ParseException {
-        SimpleDateFormat sim=new SimpleDateFormat("yyyy-MM-dd hh");
-        String str="2011-5-31 23:40:21";
-        Date s1 =sim.parse(str);
-       String str2 = "2011-5-30 15:40:21";
-       Date s2 = sim.parse(str2);
-       Long a = s1.getTime();
-       Long b = s2.getTime();
-        Double  days = 1.0*(a-b)/(24*60*60*1000);
+        SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd hh");
+        String str = "2011-5-31 23:40:21";
+        Date s1 = sim.parse(str);
+        String str2 = "2011-5-30 15:40:21";
+        Date s2 = sim.parse(str2);
+        Long a = s1.getTime();
+        Long b = s2.getTime();
+        Double days = 1.0 * (a - b) / (24 * 60 * 60 * 1000);
         System.out.println(days);
     }
-
-
-
-
 
 
 }

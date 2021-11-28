@@ -32,7 +32,7 @@ public class Leavee {
     private String offtype;
     //请假原因
     @NotEmpty(message = "注解声名:请假原因不能为空")
-    private  String offreason;
+    private String offreason;
     //请假状态
     private String offstatus;
     //请假失败批语

@@ -8,9 +8,10 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 
-public interface LeaveRepository extends JpaRepository<Leavee,Long> {
+public interface LeaveRepository extends JpaRepository<Leavee, Long> {
     /**
      * 根据申请人查找数据
+     *
      * @param applicant
      * @return
      */
@@ -19,6 +20,7 @@ public interface LeaveRepository extends JpaRepository<Leavee,Long> {
 
     /**
      * 根据请假单的状态查找
+     *
      * @param offstatus
      * @return
      */

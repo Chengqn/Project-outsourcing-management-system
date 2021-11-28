@@ -10,21 +10,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 
 
-
 @SpringBootApplication
 @EnableAsync
 //@EnableScheduling
 @Controller
 //@EnableCaching
 public class StudioDemoApplication {
-    @RequestMapping("/")  
-    public String greeting(ModelMap map) {  
+    @RequestMapping("/")
+    public String greeting(ModelMap map) {
         String jreVersion = System.getProperty("java.specification.version");
         map.addAttribute("jreVersion", "v" + jreVersion);
         return "index";
-    } 
+    }
 
-	public static void main(String[] args) {
-		SpringApplication.run(StudioDemoApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(StudioDemoApplication.class, args);
+    }
 }
